@@ -104,16 +104,17 @@
                                     <thead>
                                     <tr></tr>
                                     </thead>
-                                    <tbody th:each="detail : ${ detailList }">
+                                    <tbody>
                                     <tr>
                                         <th>
                                             작성자 <span id="pointtext"></span>
                                         </th>
                                         <td>
-                                            <input class="form-control" type="text" th:value="${ detail.memberName }" name="memberName"
+                                            <input class="form-control" type="text" th:value="${ taskDetail.memberName }" name="memberName"
                                             aria-label="Disabled input example" disabled>
-                                            <input type="hidden" th:value="${detail.taskId}" class="taskId" id="taskId" name="taskId"/>
-                                            <input type="hidden" th:value="${detail.memberId}" class="memberId" id="memberId" name="memberId"/>
+                                            <input type="hidden" th:value="${taskDetail.taskId}" class="taskId" id="taskId" name="taskId"/>
+                                            <input type="hidden" th:value="${taskDetail.memberId}" class="memberId" id="memberId" name="memberId"/>
+                                            <input type="hidden" th:value="${taskDetail.clsId}" class="clsId" id="clsId" name="clsId"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -121,7 +122,7 @@
                                             제목 <span id="pointtext"></span>
                                         </th>
                                         <td>
-                                            <input class="form-control" type="text" th:value="${ detail.taskTitle }" name="taskTitle"
+                                            <input class="form-control" type="text" th:value="${ taskDetail.taskTitle }" name="taskTitle"
                                             aria-label="default input example" readonly>
                                         </td>
                                     </tr>
@@ -139,7 +140,7 @@
                                     <tr>
                                         <th>내용 <span id="pointtext"></span></th>
                                         <td>
-                                            <textarea class="form-control notiContents" id="exampleFormControlTextarea1" rows="3" th:text="${ detail.taskContent }" name="taskContent" readonly></textarea>
+                                            <textarea class="form-control notiContents" id="exampleFormControlTextarea1" rows="3" th:text="${ taskDetail.taskContent }" name="taskContent" readonly></textarea>
                                         </td>
                                     </tr>
     
@@ -182,19 +183,22 @@
                          <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">×</span>
+                         </button>
                              </div>
                                  <div class="modal-body">
                                      삭제 하시겠습니까?
-                                 </div>
-                                 <div class="modal-footer" th:each="detail : ${ detailList }">
+       							 </div>
+                                 <div class="modal-footer"> 
                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal();">취소</button>
-                                 <button type="button" class="btn btn-primary delete-btn" th:onclick="'location.href=\'' + @{/admin/deleteBoard(clsId=${param.clsId},taskId=${detail.taskId})} + '\';'">삭제</button>
-                             </div>
+                                 <button type="button" class="btn btn-primary delete-btn" th:onclick="'location.href=\'' + @{/admin/deleteBoard(clsId=${param.clsId},taskId=${param.taskId})} + '\';'">삭제</button>
+                            </div>
                          </div>
                      </div>
-                 </div>
-    	
+                 </div>	
+           
 
+                 
+			
     
 
     <!--  Ajax -->
@@ -245,7 +249,8 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
 
-    <!-- Page level plugins --><script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
